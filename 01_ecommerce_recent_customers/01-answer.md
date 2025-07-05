@@ -23,6 +23,10 @@ Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test e
 
 ---
 
-<!-- Buradan sonrasını sen yazacaksın -->
+## ✅ Çözüm
+
+```sql
+-- SQL sorgunuzu buraya yazın
+```
 
 
