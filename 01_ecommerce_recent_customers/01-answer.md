@@ -11,6 +11,8 @@ Bu dosya içerisinde:
 - Gerçekçi ve çeşitli **test verileri**
 yer almaktadır.
 
+> 🧠 **Not:** Bu veri seti, bu GitHub reposuna özel olarak, senaryo tabanlı SQL problemlerinin çözümünü desteklemek amacıyla **yapay zeka tarafından oluşturulmuştur**.
+
 Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test edebilirsiniz.
 
 ---
