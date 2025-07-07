@@ -16,8 +16,6 @@ Aşağıdaki kavramlar, bu problemin çözümünde kullanılmış ve SQL'de **ve
 
 ## 🔍 JOIN Türleri ve Kullanım Senaryoları
 
----
-
 ### 1️⃣ `INNER JOIN` – Ortak Olan Kayıtları Getir
 
 ```sql
@@ -27,12 +25,8 @@ INNER JOIN Categories AS C
     ON P.CategoryID = C.CategoryID;
 ```
 
-**Ne yapar?**
-- Sadece `Products` ve `Categories` tablolarında **eşleşen** `CategoryID` kayıtlarını döner.
-
-**Ne zaman kullanılır?**
-- Eşleşmeyen veriler sizin için önemsizse.
-- Örn: Sadece kategorisi tanımlanmış ürünleri listelemek istiyorsanız.
+✅ Sadece eşleşen kayıtlar döner.
+✅ Sadece kategorisi olan ürünler gelir.
 
 ---
 
@@ -45,13 +39,8 @@ LEFT JOIN Categories AS C
     ON P.CategoryID = C.CategoryID;
 ```
 
-**Ne yapar?**
-- `Products` tablosundaki **tüm kayıtlar** gelir.
-- Eğer ürünün kategorisi yoksa `CategoryName` NULL olur.
-
-**Ne zaman kullanılır?**
-- Ana tablonuz (örneğin ürünler) eksiksiz listelenmeli ama eşleşen bilgiler varsa eklensin istiyorsanız.
-- Örn: Tüm ürünleri listele ama bazıları henüz kategoriye atanmadıysa bile dahil et.
+✅ Tüm ürünler gelir.  
+❗ Kategorisi olmayan ürünlerde `CategoryName` NULL olur.
 
 ---
 
@@ -64,13 +53,8 @@ RIGHT JOIN Categories AS C
     ON P.CategoryID = C.CategoryID;
 ```
 
-**Ne yapar?**
-- `Categories` tablosundaki **tüm kayıtlar** gelir.
-- Hiçbir ürünle eşleşmeyen kategorilerde `ProductName` NULL olur.
-
-**Ne zaman kullanılır?**
-- Ana tablonuz `Categories` ise ve tüm kategorilerin durumunu görmek istiyorsanız.
-- Örn: Sistemde tanımlı tüm kategoriler listelensin, ürün yoksa bile gösterilsin.
+✅ Tüm kategoriler gelir.  
+❗ Ürünü olmayan kategorilerde `ProductName` NULL olur.
 
 ---
 
@@ -82,14 +66,8 @@ FROM Products AS P
 FULL JOIN Categories AS C
     ON P.CategoryID = C.CategoryID;
 ```
-
-**Ne yapar?**
-- Hem `Products` hem de `Categories` tablolarındaki **tüm kayıtları** getirir.
-- Eşleşmeyen taraflar için diğer sütunlar `NULL` olur.
-
-**Ne zaman kullanılır?**
-- Her iki tabloyu da eksiksiz görmek istiyorsanız.
-- Örn: Hem kategorisi olmayan ürünleri, hem de hiç ürün içermeyen kategorileri analiz etmek için.
+✅ Hem ürünler hem kategoriler gelir.  
+❗ Eşleşmeyen taraflar NULL olur.
 
 ---
 
@@ -101,19 +79,13 @@ FROM Products AS P
 CROSS JOIN Categories AS C;
 ```
 
-**Ne yapar?**
-- Her ürün ile her kategoriyi eşleştirir.
-- Örn: 5 ürün × 3 kategori = 15 satır
+- Tablolardaki tüm kayıtlar birbirleriyle çarpılır.
+- Örn: 5 ürün × 3 kategori = 15 satır.
 
-**Ne zaman kullanılır?**
-- Kombinasyon üretmek istediğinizde.
-- Nadir kullanılır, genellikle test verisi üretme, varyasyon oluşturma gibi amaçlarla kullanılır.
 
 ---
 
 ## 🔧 Diğer Yardımcı Yapılar
-
----
 
 ### 🔁 `ON` – Hangi Alanlarla Eşleştirilecek?
 
@@ -121,8 +93,8 @@ CROSS JOIN Categories AS C;
 ... ON P.CategoryID = C.CategoryID
 ```
 
-- JOIN'in hangi sütunlara göre çalışacağını belirtir.
-- Mantıklı ve anlamlı bir eşleşme yapılmazsa sonuçlar bozulur.
+- JOIN’in eşleştirme şartıdır.
+- Doğru sütunlar eşleştirilmezse veri anlamsız olur.
 
 ---
 
@@ -133,6 +105,8 @@ FROM Products AS P
 INNER JOIN Categories AS C ...
 ```
 
-- `Products` → `P`  
-- `Categories` → `C`  
-- Sorguyu kısaltır, daha okunabilir hale getirir.
+- `Products` → `P`, `Categories` → `C` kısaltmaları yapılır.
+- Kod okunabilirliğini artırır.
+
+---
+
