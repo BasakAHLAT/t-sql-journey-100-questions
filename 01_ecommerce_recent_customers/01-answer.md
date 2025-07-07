@@ -100,3 +100,4 @@ Bu sorgu:
 
 ---
 
+> **🎯 Bu Problemde Öğrenilen Ana SQL Kavramları: ** [`01_learn.md`](./01_learn.md)
