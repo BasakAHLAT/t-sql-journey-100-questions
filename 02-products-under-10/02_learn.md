@@ -26,6 +26,7 @@ INNER JOIN Categories AS C
 ```
 
 ✅ Sadece eşleşen kayıtlar döner.
+
 ✅ Sadece kategorisi olan ürünler gelir.
 
 ---
@@ -40,6 +41,7 @@ LEFT JOIN Categories AS C
 ```
 
 ✅ Tüm ürünler gelir.  
+
 ❗ Kategorisi olmayan ürünlerde `CategoryName` NULL olur.
 
 ---
@@ -54,6 +56,7 @@ RIGHT JOIN Categories AS C
 ```
 
 ✅ Tüm kategoriler gelir.  
+
 ❗ Ürünü olmayan kategorilerde `ProductName` NULL olur.
 
 ---
@@ -66,7 +69,9 @@ FROM Products AS P
 FULL JOIN Categories AS C
     ON P.CategoryID = C.CategoryID;
 ```
+
 ✅ Hem ürünler hem kategoriler gelir.  
+
 ❗ Eşleşmeyen taraflar NULL olur.
 
 ---
@@ -81,7 +86,6 @@ CROSS JOIN Categories AS C;
 
 - Tablolardaki tüm kayıtlar birbirleriyle çarpılır.
 - Örn: 5 ürün × 3 kategori = 15 satır.
-
 
 ---
 
