@@ -62,28 +62,3 @@ SELECT CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
 ```
 
 ---
-
-### 4️⃣ `WHERE` + `>=` – Tarih Filtresi
-
-```sql
--- Son 7 günde kayıt olanları getir
-SELECT *
-FROM Customers
-WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
-```
-
----
-
-### 5️⃣ Tarih Karşılaştırması – Saatli vs. Saatsiz
-
-```sql
--- DATETIME karşılaştırma (saat dahil)
-WHERE RegistrationDate >= DATEADD(DAY, -7, GETDATE());
-
--- Sadece tarih karşılaştırması (saat hariç)
-WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
-```
-
-Saat bilgisi içeriyorsa 7 gün önceki günün bazı saatleri dışarıda kalabilir. Bu nedenle `CAST(... AS DATE)` ile sadece tarih karşılaştırması daha güvenlidir.
-
----
