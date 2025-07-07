@@ -110,3 +110,14 @@ INNER JOIN Categories AS C ...
 
 ---
 
+## 🧠 Özet
+
+`SELECT` kısmı sadece **ne göstermek istediğini** belirler.  
+`JOIN` kısmı ise **hangi satırların** sorguya dahil edileceğini belirler.
+
+> 👉 `SELECT` → Hangi sütunlar görünsün  
+> 👉 `JOIN` → Hangi satırlar listeye dahil edilsin
+
+---
+
+
