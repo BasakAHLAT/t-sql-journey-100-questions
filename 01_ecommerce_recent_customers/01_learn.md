@@ -24,15 +24,30 @@ SELECT GETDATE();  -- Örn: 2025-07-05 23:06:00.000
 
 ---
 
-### 2️⃣ `DATEADD()` – Tarihe Gün Ekleme veya Çıkarma
+### 2️⃣ `DATEADD()` – Tarihe Zaman Eklemek veya Çıkarmak
 
 ```sql
--- 7 gün geri git
-SELECT DATEADD(DAY, -7, GETDATE());
+-- 🔙 Gün bazında geri gitme
+SELECT DATEADD(DAY, -7, GETDATE());   -- 7 gün önce
+SELECT DATEADD(DAY, -30, GETDATE());  -- 30 gün önce
 
--- 1 ay ileri git
-SELECT DATEADD(MONTH, 1, GETDATE());
+-- 🔜 Gün bazında ileri gitme
+SELECT DATEADD(DAY, 10, GETDATE());   -- 10 gün sonrası
+
+-- 📆 Ay bazında ileri ve geri gitme
+SELECT DATEADD(MONTH, -1, GETDATE()); -- 1 ay önce
+SELECT DATEADD(MONTH, 2, GETDATE());  -- 2 ay sonra
+
+-- 📅 Yıl bazında zaman ekleme ve çıkarma
+SELECT DATEADD(YEAR, -1, GETDATE());  -- Geçen yıl bu zaman
+SELECT DATEADD(YEAR, 5, GETDATE());   -- 5 yıl sonra
+
+-- ⏱ Saat/dakika bazında oynamak
+SELECT DATEADD(HOUR, -5, GETDATE());   -- 5 saat önce
+SELECT DATEADD(MINUTE, 30, GETDATE()); -- 30 dakika sonra
 ```
+
+💡 `DATEADD()` fonksiyonunda kullanılabilecek `datepart` değerleri: `YEAR`, `QUARTER`, `MONTH`, `DAY`, `HOUR`, `MINUTE`, `SECOND`, vb.
 
 ---
 
