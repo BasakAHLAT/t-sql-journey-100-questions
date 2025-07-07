@@ -7,8 +7,6 @@ Aşağıdaki kavramlar, bu problemin çözümünde kullanılmış ve SQL'de tari
 | `GETDATE()`                      | Şu anki tarih ve saat bilgisini döndürür |
 | `DATEADD()`                      | Bir tarihe gün/ay/yıl/saat ekler veya çıkarır |
 | `CAST(... AS DATE)`             | `DATETIME` verisini sadece `DATE` tipine çevirir (saat kısmını siler) |
-| `WHERE` + `>=`                  | Belirli bir tarih veya değerle karşılaştırma yaparak filtreleme sağlar |
-| Tarih karşılaştırması            | Saat bilgili ve sadece tarih içeren değerlerin karşılaştırılması |
 
 ---
 
