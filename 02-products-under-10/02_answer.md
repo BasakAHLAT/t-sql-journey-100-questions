@@ -1,34 +1,57 @@
-# 💡 Problem 02 – Fiyatı 10 Doların Altındaki Ürünler
+# 🛍️ 02 – Product Catalog: Price < 10 USD
 
-## 📁 Gerekli Dosya
-Bu problemi çalıştırmadan önce `02_dataset.sql` dosyasını indirip çalıştırmalısınız. Bu dosya, gerekli tabloları oluşturur ve test verilerini ekler.
+## 📥 Dataset Kurulumu
 
----
+Bu problemi çözmeye başlamadan önce, aşağıdaki SQL dosyasını indirmeniz ve kendi SQL Server ortamınızda çalıştırmanız gerekmektedir:
 
-## 🎯 Soru
-> Bir ürün kataloğunda, fiyatı 10 doların altında olan tüm ürünlerin adlarını, fiyatlarını ve kategorilerini listeleyin.
+> **🎯 Dosya:** [`02_dataset.sql`](./02_dataset.sql)
 
----
+Bu dosya içerisinde:
+- Gerekli **tabloların yapısı** (`Categories`, `Products`)
+- Gerçekçi ve çeşitli **test verileri**
+yer almaktadır.
 
-## 🪜 Sorgunun Gelişim Aşamaları
+> 🧠 **Not:** Bu veri seti, bu GitHub reposuna özel olarak, senaryo tabanlı SQL problemlerinin çözümünü desteklemek amacıyla **yapay zeka tarafından oluşturulmuştur**.
 
-### 1️⃣ Tüm Ürünleri Listeleme (Başlangıç)
-```sql
-SELECT * FROM dbo.Products;
-```
+Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test edebilirsiniz.
 
 ---
 
-### 2️⃣ Fiyatı 10 Doların Altında Olan Ürünleri Filtreleme
+## ❓ Soru
+
+**2. Bir ürün kataloğunda, fiyatı 10 doların altında olan tüm ürünlerin adlarını, fiyatlarını ve kategorilerini listeleyin.**
+
+---
+
+## ✅ Çözüm
+
+### 🧩 Adım 1: Temel sorguyla başlıyoruz
+
 ```sql
 SELECT * 
-FROM dbo.Products 
+FROM dbo.Products;
+```
+
+Bu sorgu, `Products` tablosundaki tüm verileri getirir.  
+Henüz fiyat veya kategoriyle ilgili herhangi bir filtre uygulanmamıştır.
+
+---
+
+### 🧩 Adım 2: Fiyat filtresi ekleniyor
+
+```sql
+SELECT * 
+FROM dbo.Products
 WHERE Price < 10;
 ```
 
+Bu haliyle yalnızca **fiyatı 10 doların altında olan ürünler** listelenir.  
+Ancak kategori bilgisi henüz dahil değildir.
+
 ---
 
-### 3️⃣ Kategori Tablosu ile JOIN Kullanımı
+### 🧩 Adım 3: Kategori bilgisi için `JOIN`
+
 ```sql
 SELECT * 
 FROM dbo.Products AS P
@@ -37,9 +60,14 @@ INNER JOIN dbo.Categories AS C
 WHERE P.Price < 10;
 ```
 
+Bu sorgu:
+- `Products` ve `Categories` tablolarını birleştirir
+- Ancak `SELECT *` hâlâ fazla bilgi getirir
+
 ---
 
-### 4️⃣ Nihai ve Optimize Sorgu
+### 🧩 Adım 4: Gerekli sütunlara indirgeme
+
 ```sql
 SELECT 
     P.ProductName,
@@ -51,3 +79,6 @@ INNER JOIN dbo.Categories AS C
 WHERE P.Price < 10;
 ```
 
+Bu haliyle:
+- Sadece ürün adı, fiyat ve kategori adı gösterilir
+- En okunabilir ve optimize hali budur
