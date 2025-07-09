@@ -89,13 +89,6 @@ Bu örneklerde olduğu gibi, hatalı değerler filtre dışında kalır.
 
 ---
 
-## ❗ Alternatif: TRY_CAST
-
-`TRY_CAST()` de benzer şekilde çalışır ancak SQL Server’ın sürümüne göre farklı davranışlar gösterebilir.  
-Genelde `TRY_CONVERT()` daha geniş tip desteğine sahiptir.
-
----
-
 ### Geçersiz veri kontrolü
 
 ```sql
