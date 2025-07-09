@@ -1,4 +1,3 @@
-
 # 🚗 09 – Car Rental: Cars Under 50,000 KM
 
 ## 📥 Dataset Kurulumu
@@ -108,3 +107,85 @@ WHERE TRY_CONVERT(INT, Kilometer) IS NULL;
 Bu sorgu:
 - Sayıya çevrilemeyen değerleri yakalar
 - Veri kalitesini test etmek için kullanışlıdır
+
+---
+
+## 🧠 TRY_CONVERT Fonksiyonu Detaylı Açıklama
+
+### ❓ Ne işe yarar?
+
+Bir veri tipini **başka bir veri tipine güvenli şekilde** dönüştürmek için kullanılır.
+
+```sql
+TRY_CONVERT(hedef_veri_tipi, dönüştürülecek_değer)
+```
+
+- Eğer dönüşüm **başarılıysa**, dönüştürülmüş değeri verir.
+- Eğer dönüşüm **başarısızsa**, hata vermez, bunun yerine `NULL` döndürür.
+
+---
+
+### 🎯 Ne zaman kullanılır?
+
+Eğer bir kolonda **sayı gibi görünen ama aslında yazı (string)** olarak saklanan değerler varsa ve bu değerlerin bazıları **hatalıysa**, `TRY_CONVERT` hatasız çalışmak için idealdir.
+
+---
+
+### 🔬 Örnekler
+
+Veri sütunu: `Kilometer (NVARCHAR)`  
+İçerik:
+
+| Kilometer     |
+|---------------|
+| '48000'       |
+| '49999'       |
+| '48000 KM'    |
+| 'NaN'         |
+| '50.000'      |
+| 'abc'         |
+
+```sql
+-- Bu çalışmaz (hata verir)
+SELECT CAST(Kilometer AS INT) FROM s09.Cars;
+
+-- Bu güvenlidir
+SELECT TRY_CONVERT(INT, Kilometer) AS SayisalKM FROM s09.Cars;
+```
+
+Sonuç tablosu:
+
+| Kilometer     | SayisalKM |
+|---------------|-----------|
+| '48000'       | 48000     |
+| '49999'       | 49999     |
+| '48000 KM'    | NULL      |
+| 'NaN'         | NULL      |
+| '50.000'      | NULL      |
+| 'abc'         | NULL      |
+
+---
+
+### ✅ Filtrelemede Nasıl Kullanılır?
+
+```sql
+SELECT Model, Plate, Kilometer
+FROM s09.Cars
+WHERE TRY_CONVERT(INT, Kilometer) < 50000;
+```
+
+Bu sorgu:
+- Sayıya çevrilebilen verilerde filtre yapar
+- Hatalı girilmiş değerler (NULL olanlar) otomatik olarak dışlanır
+
+---
+
+### 📌 Özet Karşılaştırma
+
+| Fonksiyon        | Açıklama                                 |
+|------------------|------------------------------------------|
+| `CONVERT()`      | Dönüşüm yapar, hatalıysa sorguyu durdurur |
+| `TRY_CONVERT()`  | Dönüşüm yapar, hatalıysa `NULL` döner     |
+| `CAST()`         | `CONVERT` gibi çalışır, hata verebilir    |
+| `TRY_CAST()`     | `TRY_CONVERT` gibi güvenlidir, destek sınırlıdır |
+
