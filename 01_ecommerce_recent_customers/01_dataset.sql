@@ -1,5 +1,3 @@
-DROP TABLE s01.Cities
-
 CREATE SCHEMA s01;
 
 -- Şehirler tablosu
