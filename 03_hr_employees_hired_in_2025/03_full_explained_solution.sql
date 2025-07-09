@@ -14,10 +14,10 @@
 
 -- ✅ Çözüm
 SELECT emp.FirstName, dep.DepartmentName, pos.PositionTitle, emp.HireDate
-FROM dbo.Employees AS emp
-INNER JOIN dbo.Positions AS pos
+FROM s03.Employees AS emp
+INNER JOIN s03.Positions AS pos
 ON emp.PositionID = pos.PositionID
-INNER JOIN dbo.Departments AS dep
+INNER JOIN s03.Departments AS dep
 ON pos.DepartmentID = dep.DepartmentID
 WHERE emp.HireDate >= '2025-01-01' AND emp.HireDate < '2026-01-01';
 
