@@ -16,14 +16,14 @@
 
 -- 🧩 Adım 1: Temel sorguyla başlıyoruz
 SELECT * 
-FROM dbo.Customers;
+FROM s01.Customers;
 
 -- Bu sorgu, Customers tablosundaki tüm verileri getirir.
 -- Henüz herhangi bir filtre uygulanmadı; tarih ya da kayıt bilgisi dikkate alınmaz.
 
 -- 🧩 Adım 2: Filtre eklemeye başlıyoruz – WHERE kullanımı
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= GETDATE();
 
 -- Bu, sadece şu anki tarih ve saatten sonra kayıt olan müşterileri getirir.
@@ -32,7 +32,7 @@ WHERE RegistrationDate >= GETDATE();
 
 -- 🧩 Adım 3: 7 gün öncesine gitmek için DATEADD
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= DATEADD(DAY, -7, GETDATE());
 
 -- Bu sorgu:
@@ -43,7 +43,7 @@ WHERE RegistrationDate >= DATEADD(DAY, -7, GETDATE());
 
 -- 🧩 Adım 4: Sadece tarihi dikkate almak için CAST
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
 
 -- Bu haliyle:
@@ -53,7 +53,7 @@ WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
 
 -- 🧩 Final Sorgu
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
 
 -- Bu sorgu:
