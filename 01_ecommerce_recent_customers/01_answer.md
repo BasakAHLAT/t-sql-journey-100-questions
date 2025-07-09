@@ -29,7 +29,7 @@ Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test e
 
 ```sql
 SELECT * 
-FROM dbo.Customers;
+FROM s01.Customers;
 ```
 
 Bu sorgu, `Customers` tablosundaki tüm verileri getirir.  
@@ -41,7 +41,7 @@ Henüz herhangi bir filtre uygulanmadı; tarih ya da kayıt bilgisi dikkate alı
 
 ```sql
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= GETDATE();
 ```
 
@@ -55,7 +55,7 @@ Ama bu mantıklı değildir çünkü gelecek zamanda kayıt olan kullanıcı olm
 
 ```sql
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= DATEADD(DAY, -7, GETDATE());
 ```
 
@@ -72,7 +72,7 @@ Bu sorgu:
 
 ```sql
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
 ```
 
@@ -89,7 +89,7 @@ Bu haliyle:
 
 ```sql
 SELECT * 
-FROM dbo.Customers
+FROM s01.Customers
 WHERE RegistrationDate >= CAST(DATEADD(DAY, -7, GETDATE()) AS DATE);
 ```
 
