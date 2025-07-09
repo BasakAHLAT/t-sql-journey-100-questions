@@ -29,7 +29,7 @@ Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test e
 
 ```sql
 SELECT * 
-FROM dbo.Orders;
+FROM s04.Orders;
 ```
 
 Bu sorgu, `Orders` tablosundaki tüm siparişleri getirir. Ancak henüz tarihe göre filtreleme yapılmamıştır.
@@ -40,7 +40,7 @@ Bu sorgu, `Orders` tablosundaki tüm siparişleri getirir. Ancak henüz tarihe g
 
 ```sql
 SELECT * 
-FROM dbo.Orders
+FROM s04.Orders
 WHERE OrderDate >= DATEADD(MONTH, -1, GETDATE());
 ```
 
@@ -57,7 +57,7 @@ Bu sorgu:
 
 ```sql
 SELECT OrderID, OrderDate 
-FROM dbo.Orders
+FROM s04.Orders
 WHERE OrderDate >= DATEADD(MONTH, -1, GETDATE());
 ```
 
