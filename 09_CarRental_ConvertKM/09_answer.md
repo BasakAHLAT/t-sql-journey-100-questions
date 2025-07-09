@@ -73,41 +73,7 @@ Bu sorgu:
 
 ## 🔍 TRY_CONVERT ile Güvenli Dönüşüm
 
-`TRY_CONVERT` fonksiyonu, özellikle **hatalı veri girişlerini dışlamak** için çok yararlıdır.
-
-```sql
--- Geçerli dönüşüm (döner)
-SELECT TRY_CONVERT(INT, '49000');  -- Sonuç: 49000
-
--- Geçersiz dönüşüm (NULL döner)
-SELECT TRY_CONVERT(INT, '49.000');    -- Sonuç: NULL
-SELECT TRY_CONVERT(INT, 'NaN');       -- Sonuç: NULL
-SELECT TRY_CONVERT(INT, '48000 KM');  -- Sonuç: NULL
-```
-
-Bu örneklerde olduğu gibi, hatalı değerler filtre dışında kalır.
-
----
-
-### Geçersiz veri kontrolü
-
-```sql
-SELECT *
-FROM s09.Cars
-WHERE TRY_CONVERT(INT, Kilometer) IS NULL;
-```
-
-Bu sorgu:
-- Sayıya çevrilemeyen değerleri yakalar
-- Veri kalitesini test etmek için kullanışlıdır
-
----
-
-## 🧠 TRY_CONVERT Fonksiyonu Detaylı Açıklama
-
-### ❓ Ne işe yarar?
-
-Bir veri tipini **başka bir veri tipine güvenli şekilde** dönüştürmek için kullanılır.
+`TRY_CONVERT` fonksiyonu, özellikle **hatalı veri girişlerini dışlamak** için çok yararlıdır. Veri kalitesini test etmek için kullanılır.
 
 ```sql
 TRY_CONVERT(hedef_veri_tipi, dönüştürülecek_değer)
@@ -172,13 +138,4 @@ Bu sorgu:
 - Hatalı girilmiş değerler (NULL olanlar) otomatik olarak dışlanır
 
 ---
-
-### 📌 Özet Karşılaştırma
-
-| Fonksiyon        | Açıklama                                 |
-|------------------|------------------------------------------|
-| `CONVERT()`      | Dönüşüm yapar, hatalıysa sorguyu durdurur |
-| `TRY_CONVERT()`  | Dönüşüm yapar, hatalıysa `NULL` döner     |
-| `CAST()`         | `CONVERT` gibi çalışır, hata verebilir    |
-| `TRY_CAST()`     | `TRY_CONVERT` gibi güvenlidir, destek sınırlıdır |
 
