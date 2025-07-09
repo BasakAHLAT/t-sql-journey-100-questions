@@ -43,10 +43,10 @@ INSERT INTO s02.Products (ProductName, Price, StockQuantity, IsActive, CategoryI
 ('Oyuncak Araba', 9.00, 40, 1, 5),
 ('Gece Lambasý', 14.75, 55, 1, 1);
 
-INSERT INTO Products (ProductName, Price, StockQuantity, IsActive, CategoryID)
+INSERT INTO s02.Products (ProductName, Price, StockQuantity, IsActive, CategoryID)
 VALUES ('Kategorisiz Ürün', 5.99, 10, 1, NULL);
 
-INSERT INTO Categories (CategoryName)
+INSERT INTO s02.Categories (CategoryName)
 VALUES ('Boþ Kategori');
 
 
