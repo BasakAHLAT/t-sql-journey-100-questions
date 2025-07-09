@@ -1,21 +1,25 @@
+DROP TABLE s01.Cities
+
+CREATE SCHEMA s01;
+
 -- Şehirler tablosu
-CREATE TABLE Cities (
+CREATE TABLE s01.Cities (
     CityID INT IDENTITY(1,1) PRIMARY KEY,
     CityName VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Müşteriler tablosu
-CREATE TABLE Customers (
+CREATE TABLE s01.Customers (
     CustomerID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
     RegistrationDate DATE NOT NULL CHECK (RegistrationDate >= '2000-01-01'),
-    CityID INT FOREIGN KEY REFERENCES Cities(CityID)
+    CityID INT FOREIGN KEY REFERENCES s01.Cities(CityID)
 );
 
 -- Ürünler tablosu
-CREATE TABLE Products (
+CREATE TABLE s01.Products (
     ProductID INT IDENTITY(1,1) PRIMARY KEY,
     ProductName VARCHAR(100) NOT NULL,
     Price DECIMAL(10,2) NOT NULL CHECK (Price >= 0),
@@ -24,28 +28,28 @@ CREATE TABLE Products (
 );
 
 -- Siparişler tablosu
-CREATE TABLE Orders (
+CREATE TABLE s01.Orders (
     OrderID INT IDENTITY(1,1) PRIMARY KEY,
-    CustomerID INT NOT NULL FOREIGN KEY REFERENCES Customers(CustomerID),
+    CustomerID INT NOT NULL FOREIGN KEY REFERENCES s01.Customers(CustomerID),
     OrderDate DATE NOT NULL,
     TotalAmount DECIMAL(10,2) NOT NULL CHECK (TotalAmount >= 0)
 );
 
 -- Sipariş detayları tablosu
-CREATE TABLE OrderDetails (
+CREATE TABLE s01.OrderDetails (
     OrderDetailID INT IDENTITY(1,1) PRIMARY KEY,
-    OrderID INT NOT NULL FOREIGN KEY REFERENCES Orders(OrderID),
-    ProductID INT NOT NULL FOREIGN KEY REFERENCES Products(ProductID),
+    OrderID INT NOT NULL FOREIGN KEY REFERENCES s01.Orders(OrderID),
+    ProductID INT NOT NULL FOREIGN KEY REFERENCES s01.Products(ProductID),
     Quantity INT NOT NULL CHECK (Quantity > 0),
     UnitPrice DECIMAL(10,2) NOT NULL CHECK (UnitPrice >= 0)
 );
 
 -- Şehir verileri
-INSERT INTO Cities (CityName) VALUES
+INSERT INTO s01.Cities (CityName) VALUES
 ('İstanbul'), ('Ankara'), ('İzmir'), ('Bursa'), ('Antalya');
 
 -- Müşteri verileri (bazıları son 7 günde kayıtlı)
-INSERT INTO Customers (FirstName, LastName, Email, RegistrationDate, CityID) VALUES
+INSERT INTO s01.Customers (FirstName, LastName, Email, RegistrationDate, CityID) VALUES
 ('Ayşe', 'Yılmaz', 'ayse.yilmaz@example.com', CAST(GETDATE() AS DATE), 1),
 ('Mehmet', 'Demir', 'mehmet.demir@example.com', CAST(GETDATE()-1 AS DATE), 2),
 ('Elif', 'Kaya', 'elif.kaya@example.com', CAST(GETDATE()-2 AS DATE), 3),
@@ -58,7 +62,7 @@ INSERT INTO Customers (FirstName, LastName, Email, RegistrationDate, CityID) VAL
 ('Can', 'Aydın', 'can.aydin@example.com', '2022-09-12', 5);
 
 -- Ürün verileri
-INSERT INTO Products (ProductName, Price, StockQuantity, IsActive) VALUES
+INSERT INTO s01.Products (ProductName, Price, StockQuantity, IsActive) VALUES
 ('Laptop', 15000.00, 12, 1),
 ('Telefon', 8000.00, 35, 1),
 ('Kulaklık', 450.00, 100, 1),
@@ -71,7 +75,7 @@ INSERT INTO Products (ProductName, Price, StockQuantity, IsActive) VALUES
 ('Akıllı Saat', 1200.00, 50, 1);
 
 -- Siparişler
-INSERT INTO Orders (CustomerID, OrderDate, TotalAmount) VALUES
+INSERT INTO s01.Orders (CustomerID, OrderDate, TotalAmount) VALUES
 (1, CAST(GETDATE()-1 AS DATE), 8300.00),
 (2, CAST(GETDATE()-3 AS DATE), 9450.00),
 (3, CAST(GETDATE()-5 AS DATE), 690.00),
@@ -79,7 +83,7 @@ INSERT INTO Orders (CustomerID, OrderDate, TotalAmount) VALUES
 (5, CAST(GETDATE()-15 AS DATE), 5000.00);
 
 -- Sipariş detayları
-INSERT INTO OrderDetails (OrderID, ProductID, Quantity, UnitPrice) VALUES
+INSERT INTO s01.OrderDetails (OrderID, ProductID, Quantity, UnitPrice) VALUES
 (1, 2, 1, 8000.00),
 (1, 5, 2, 150.00),
 (2, 1, 1, 15000.00),
