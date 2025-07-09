@@ -29,8 +29,8 @@ WHERE emp.HireDate >= '2025-01-01' AND emp.HireDate < '2026-01-01';
 
 -- 1️⃣ INNER JOIN – İlişkili Verileri Eşleştir
 SELECT emp.FirstName, pos.PositionTitle
-FROM Employees AS emp
-INNER JOIN Positions AS pos ON emp.PositionID = pos.PositionID;
+FROM s03.Employees AS emp
+INNER JOIN s03.Positions AS pos ON emp.PositionID = pos.PositionID;
 -- ✅ Yalnızca pozisyonu bulunan çalışanlar listelenir.
 -- ❌ Pozisyonu olmayan çalışanlar varsa sorguya dahil edilmez.
 
