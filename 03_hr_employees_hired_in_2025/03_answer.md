@@ -19,7 +19,7 @@ Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test e
 
 ## ❓ Soru
 
-**3. Bir insan kaynakları sisteminde, 2025 yılında işe alınan tüm çalışanların isimlerini, departmanlarını ve pozisyonlarını ve işe alım tarihlerini listeleyin.**
+**3. Bir insan kaynakları sisteminde, 2025 yılında işe alınan tüm çalışanların isimlerini, departmanlarını, pozisyonlarını ve işe alım tarihlerini listeleyin.**
 
 ---
 
