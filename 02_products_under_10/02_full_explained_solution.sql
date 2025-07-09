@@ -16,14 +16,14 @@
 
 -- 🧩 Adım 1: Temel sorguyla başlıyoruz
 SELECT * 
-FROM dbo.Products;
+FROM s02.Products;
 
 -- Bu sorgu, Products tablosundaki tüm verileri getirir.
 -- Henüz fiyat veya kategoriyle ilgili herhangi bir filtre uygulanmamıştır.
 
 -- 🧩 Adım 2: Fiyat filtresi ekleniyor
 SELECT * 
-FROM dbo.Products
+FROM s02.Products
 WHERE Price < 10;
 
 -- Bu haliyle yalnızca fiyatı 10 doların altında olan ürünler listelenir.
@@ -31,8 +31,8 @@ WHERE Price < 10;
 
 -- 🧩 Adım 3: Kategori bilgisi için JOIN
 SELECT * 
-FROM dbo.Products AS P
-INNER JOIN dbo.Categories AS C
+FROM s02.Products AS P
+INNER JOIN s02.Categories AS C
     ON P.CategoryID = C.CategoryID
 WHERE P.Price < 10;
 
@@ -45,8 +45,8 @@ SELECT
     P.ProductName,
     P.Price,
     C.CategoryName
-FROM dbo.Products AS P
-INNER JOIN dbo.Categories AS C
+FROM s02.Products AS P
+INNER JOIN s02.Categories AS C
     ON P.CategoryID = C.CategoryID
 WHERE P.Price < 10;
 
