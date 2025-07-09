@@ -29,7 +29,7 @@ Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test e
 
 ```sql
 SELECT * 
-FROM dbo.Products;
+FROM s02.Products;
 ```
 
 Bu sorgu, `Products` tablosundaki tüm verileri getirir.  
@@ -41,7 +41,7 @@ Henüz fiyat veya kategoriyle ilgili herhangi bir filtre uygulanmamıştır.
 
 ```sql
 SELECT * 
-FROM dbo.Products
+FROM s02.Products
 WHERE Price < 10;
 ```
 
@@ -54,8 +54,8 @@ Ancak kategori bilgisi henüz dahil değildir.
 
 ```sql
 SELECT * 
-FROM dbo.Products AS P
-INNER JOIN dbo.Categories AS C
+FROM s02.Products AS P
+INNER JOIN s02.Categories AS C
     ON P.CategoryID = C.CategoryID
 WHERE P.Price < 10;
 ```
@@ -73,8 +73,8 @@ SELECT
     P.ProductName,
     P.Price,
     C.CategoryName
-FROM dbo.Products AS P
-INNER JOIN dbo.Categories AS C
+FROM s02.Products AS P
+INNER JOIN s02.Categories AS C
     ON P.CategoryID = C.CategoryID
 WHERE P.Price < 10;
 ```
