@@ -150,6 +150,7 @@ SELECT ProductName,
 FROM s12.Products;
 
 -- 📝 `23` stil kodu `yyyy-mm-dd` formatı sağlar. Başka kodlarla tarih görünümü değiştirilebilir.
+-- 🔗 Daha fazla stil kodu için: https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql#date-and-time-styles
 
 -- Alman formatı
 SELECT CONVERT(VARCHAR, GETDATE(), 104) AS AlmanFormat;  -- 13.07.2025
