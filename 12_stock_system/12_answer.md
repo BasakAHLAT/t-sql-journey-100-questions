@@ -175,6 +175,7 @@ FROM s12.Products;
 -- Alman formatı
 SELECT CONVERT(VARCHAR, GETDATE(), 104) AS AlmanFormat;  -- 13.07.2025
 ```
+-- 🔗 Daha fazla stil kodu için: https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql#date-and-time-styles
 
 ---
 
