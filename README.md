@@ -7,7 +7,7 @@ Bu depo, T-SQL becerilerimi hem temel hem ileri düzeyde geliştirmek için olu�
 ## 🔍 Neleri Kapsıyor?
 
 - 🔰 Kolay: Filtreler, JOIN’ler, WHERE kullanımı, sıralama
-- 🟡 Orta: CTE, alt sorgular, grup fonksiyonları, pencere fonksiyonları
+- 🟡 Orta: CTE, alt sorgular, grup fonksiyonları vb.
 - 🔴 Zor: Stored procedure, trigger, index, DDM, RLS, yetkilendirme
 
 Her problem:
