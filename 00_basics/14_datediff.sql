@@ -1,4 +1,4 @@
--- 16_datediff.sql – DATEDIFF() Fonksiyonu Örnekleri
+-- 14_datediff.sql – DATEDIFF() Fonksiyonu Örnekleri
 
 -- 1. Müşterinin kayıt tarihi ile bugünün farkı (gün)
 SELECT CustomerID, FirstName, RegisteredAt,
