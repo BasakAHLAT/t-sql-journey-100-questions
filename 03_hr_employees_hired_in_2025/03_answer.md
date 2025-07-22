@@ -1,86 +1,105 @@
-# 🧑‍💼 03 – HR: Employees Hired in 2025
+# 🧑‍💼 03 – HR System: Employees Hired in 2025
 
 ## 📥 Dataset Kurulumu
 
-Bu problemi çözmeye başlamadan önce, aşağıdaki SQL dosyasını indirmeniz ve kendi SQL Server ortamınızda çalıştırmanız gerekmektedir:
+Bu problemi çözmeye başlamadan önce aşağıdaki SQL dosyasını indirip kendi SQL Server ortamınızda çalıştırmalısınız:
 
 > **🎯 Dosya:** [`03_dataset.sql`](./03_dataset.sql)
 
-Bu dosya içerisinde:
-- Gerekli **tabloların yapısı** (`Departments`, `Positions`, `Employees`)
-- Gerçekçi ve çeşitli **test verileri**
-yer almaktadır.
-
-> 🧠 **Not:** Bu veri seti, bu GitHub reposuna özel olarak, senaryo tabanlı SQL problemlerinin çözümünü desteklemek amacıyla **yapay zeka tarafından oluşturulmuştur**.
-
-Tüm verileri başarıyla yükledikten sonra sorgularınızı rahatlıkla test edebilirsiniz.
+Bu dosyada:
+- `Departments`, `Positions`, `Employees` tabloları yer almaktadır
+- Her çalışanın pozisyonu, her pozisyonun da bir departmanı bulunmaktadır
 
 ---
 
 ## ❓ Soru
 
-**3. Bir insan kaynakları sisteminde, 2025 yılında işe alınan tüm çalışanların isimlerini, departmanlarını, pozisyonlarını ve işe alım tarihlerini listeleyin.**
+**2025 yılında işe alınan tüm çalışanların adlarını, departmanlarını, pozisyonlarını ve işe alım tarihlerini listeleyin.**
 
 ---
 
-## ✅ Çözüm
+## 🔍 Adım Adım Sorgu Gelişimi
+
+### 🧩 Adım 1: Çalışanları ve işe alım tarihlerini görelim
 
 ```sql
-SELECT emp.FirstName, dep.DepartmentName, pos.PositionTitle, emp.HireDate
+SELECT * FROM s03.Employees;
+```
+
+---
+
+### 🧩 Adım 2: 2025 yılında işe alınanları filtreleyelim
+
+```sql
+SELECT * 
+FROM s03.Employees
+WHERE HireDate >= '2025-01-01' AND HireDate < '2026-01-01';
+```
+
+---
+
+### 🧩 Adım 3: Pozisyonları dahil etmek için `JOIN` kullanalım
+
+```sql
+SELECT emp.FirstName, pos.PositionTitle, emp.HireDate
 FROM s03.Employees AS emp
-INNER JOIN s03.Positions AS pos
-ON emp.PositionID = pos.PositionID
-INNER JOIN s03.Departments AS dep
-ON pos.DepartmentID = dep.DepartmentID
+INNER JOIN s03.Positions AS pos ON emp.PositionID = pos.PositionID
 WHERE emp.HireDate >= '2025-01-01' AND emp.HireDate < '2026-01-01';
 ```
 
 ---
 
-# 📚 Bu Problemde Öğrenilen Ana SQL Kavramları
-
-Aşağıdaki kavramlar, bu problemin çözümünde kullanılmıştır:
-
-| 🧠 Fonksiyon / Yapı | 💬 Açıklama |
-|---------------------|------------|
-| `INNER JOIN`        | Yalnızca eşleşen kayıtları getirir. Her çalışanın bir pozisyonu, her pozisyonun da bir departmanı vardır varsayımıyla kullanılır. |
-| `AS`                | Tabloya takma ad vererek sorgunun okunabilirliğini artırır. |
-| `ON`                | JOIN işleminin hangi sütunlara göre yapılacağını tanımlar. |
-
----
-
-### 1️⃣ `INNER JOIN` – İlişkili Verileri Eşleştir
+### 🧩 Adım 4: Departmanları da dahil edelim
 
 ```sql
-SELECT emp.FirstName, pos.PositionTitle
-FROM Employees AS emp
-INNER JOIN Positions AS pos ON emp.PositionID = pos.PositionID;
+SELECT emp.FirstName, dep.DepartmentName, pos.PositionTitle, emp.HireDate
+FROM s03.Employees AS emp
+INNER JOIN s03.Positions AS pos ON emp.PositionID = pos.PositionID
+INNER JOIN s03.Departments AS dep ON pos.DepartmentID = dep.DepartmentID
+WHERE emp.HireDate >= '2025-01-01' AND emp.HireDate < '2026-01-01';
 ```
-
-✅ Yalnızca pozisyonu bulunan çalışanlar listelenir.  
-❌ Pozisyonu olmayan çalışanlar varsa sorguya dahil edilmez.
 
 ---
 
-### 2️⃣ `AS` – Takma Ad Kullanımı
+## ✅ Final Sorgu
 
 ```sql
-FROM Employees AS emp
-JOIN Positions AS pos ON emp.PositionID = pos.PositionID
+SELECT emp.FirstName, dep.DepartmentName, pos.PositionTitle, emp.HireDate
+FROM s03.Employees AS emp
+INNER JOIN s03.Positions AS pos ON emp.PositionID = pos.PositionID
+INNER JOIN s03.Departments AS dep ON pos.DepartmentID = dep.DepartmentID
+WHERE emp.HireDate >= '2025-01-01' AND emp.HireDate < '2026-01-01';
 ```
-
-🧠 `emp` ve `pos` kısa adları sorguyu okunabilir hale getirir.  
-Büyük tablolarla çalışırken bu yapı daha yönetilebilir hale gelir.
 
 ---
 
-### 3️⃣ `ON` – JOIN Bağlantı Koşulu
+## 📚 Kullanılan SQL Kavramları
+
+| Yapı / Fonksiyon | Açıklama |
+|------------------|----------|
+| `INNER JOIN`     | İlişkili verileri bağlamak için kullanılır (eşleşen kayıtlar alınır) |
+| `AS`             | Tablolara takma ad vermek için kullanılır |
+| `ON`             | JOIN işleminin hangi alanlar üzerinden yapılacağını belirtir |
+| `WHERE`          | Belirli bir koşula göre filtreleme yapar |
+
+---
+
+## 🔎 Örnek Kullanımlar
+
+### INNER JOIN ve tarih filtresi
 
 ```sql
-ON emp.PositionID = pos.PositionID
+SELECT e.FirstName, p.PositionTitle
+FROM s03.Employees e
+JOIN s03.Positions p ON e.PositionID = p.PositionID
+WHERE e.HireDate BETWEEN '2025-01-01' AND '2025-12-31';
 ```
 
-🔗 Tabloların nasıl bağlanacağını belirler.  
-Eşleşme doğru tanımlanmazsa veri anlamsız olur ya da boş döner.
+### Çoklu JOIN ile tüm bilgileri alma
 
----
+```sql
+SELECT e.FirstName, d.DepartmentName, p.PositionTitle
+FROM s03.Employees e
+JOIN s03.Positions p ON e.PositionID = p.PositionID
+JOIN s03.Departments d ON p.DepartmentID = d.DepartmentID;
+```
