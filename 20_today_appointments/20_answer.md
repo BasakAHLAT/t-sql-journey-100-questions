@@ -33,7 +33,7 @@ SELECT * FROM s20.Appointments;
 ```sql
 SELECT * 
 FROM s20.Appointments
-WHERE CAST(AppointmentTime AS DATE) = CAST(GETDATE() AS DATE);
+WHERE TRY_CONVERT(DATE, AppointmentTime) = TRY_CONVERT(DATE, GETDATE());
 ```
 
 ---
@@ -48,7 +48,7 @@ SELECT
 FROM s20.Appointments AS a
 JOIN s20.Patients AS p ON a.PatientID = p.PatientID
 JOIN s20.Doctors AS d ON a.DoctorID = d.DoctorID
-WHERE CAST(a.AppointmentTime AS DATE) = CAST(GETDATE() AS DATE);
+WHERE TRY_CONVERT(DATE, a.AppointmentTime) = TRY_CONVERT(DATE, GETDATE());
 ```
 
 ---
@@ -63,7 +63,7 @@ SELECT
 FROM s20.Appointments AS a
 JOIN s20.Patients AS p ON a.PatientID = p.PatientID
 JOIN s20.Doctors AS d ON a.DoctorID = d.DoctorID
-WHERE CAST(a.AppointmentTime AS DATE) = CAST(GETDATE() AS DATE);
+WHERE TRY_CONVERT(DATE, a.AppointmentTime) = TRY_CONVERT(DATE, GETDATE());
 ```
 
 ---
@@ -73,7 +73,7 @@ WHERE CAST(a.AppointmentTime AS DATE) = CAST(GETDATE() AS DATE);
 | Fonksiyon / Komut        | Açıklama                                 |
 |--------------------------|------------------------------------------|
 | `GETDATE()`              | Şu anki tarih ve saat                    |
-| `CAST(... AS DATE)`      | Sadece tarih kısmını alır                |
+| `TRY_CONVERT(... AS DATE)` | Hatalı verileri NULL döndürerek dönüşüm sağlar |
 | `JOIN`                   | Hasta ve doktor bilgilerini eklemek için |
 | `WHERE`                  | Tarih filtresi uygulamak için kullanılır |
 
@@ -83,7 +83,7 @@ WHERE CAST(a.AppointmentTime AS DATE) = CAST(GETDATE() AS DATE);
 
 ```sql
 -- Bugünün tarihi:
-SELECT CAST(GETDATE() AS DATE);
+SELECT TRY_CONVERT(DATE, GETDATE());
 
 -- Tüm randevular:
 SELECT * FROM s20.Appointments;
@@ -93,5 +93,5 @@ SELECT p.PatientName, d.DoctorName, a.AppointmentTime
 FROM s20.Appointments a
 JOIN s20.Patients p ON a.PatientID = p.PatientID
 JOIN s20.Doctors d ON a.DoctorID = d.DoctorID
-WHERE CAST(a.AppointmentTime AS DATE) = CAST(GETDATE() AS DATE);
+WHERE TRY_CONVERT(DATE, a.AppointmentTime) = TRY_CONVERT(DATE, GETDATE());
 ```
